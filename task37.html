@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Application UI</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#e5ddd5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.chat-container{
+    width:900px;
+    height:600px;
+    background:white;
+    display:flex;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Sidebar */
+.sidebar{
+    width:30%;
+    background:#202c33;
+    color:white;
+}
+
+.sidebar-header{
+    padding:20px;
+    background:#2a3942;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.contact{
+    padding:15px;
+    border-bottom:1px solid #374248;
+    cursor:pointer;
+}
+
+.contact:hover{
+    background:#2a3942;
+}
+
+/* Chat Area */
+.chat-area{
+    width:70%;
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-header{
+    background:#ededed;
+    padding:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.messages{
+    flex:1;
+    padding:20px;
+    overflow-y:auto;
+    background:#efeae2;
+}
+
+.message{
+    max-width:70%;
+    padding:10px 15px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+.received{
+    background:white;
+}
+
+.sent{
+    background:#d9fdd3;
+    margin-left:auto;
+}
+
+/* Input Area */
+.input-area{
+    display:flex;
+    padding:15px;
+    background:#f0f2f5;
+}
+
+.input-area input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:20px;
+    outline:none;
+}
+
+.input-area button{
+    margin-left:10px;
+    padding:12px 20px;
+    border:none;
+    background:#00a884;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.input-area button:hover{
+    background:#008f72;
+}
+
+@media(max-width:768px){
+    .chat-container{
+        width:100%;
+        height:100vh;
+        border-radius:0;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .chat-area{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">💬 Chat App</div>
+
+        <div class="contact">👤 Arun</div>
+        <div class="contact">👤 Priya</div>
+        <div class="contact">👤 Rahul</div>
+        <div class="contact">👤 Meena</div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+
+        <div class="chat-header">
+            Arun
+        </div>
+
+        <div class="messages" id="messages">
+
+            <div class="message received">
+                Hi! How are you?
+            </div>
+
+            <div class="message sent">
+                I'm fine. How about you?
+            </div>
+
+            <div class="message received">
+                Doing great! 😊
+            </div>
+
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function sendMessage(){
+
+    let input = document.getElementById("messageInput");
+    let text = input.value.trim();
+
+    if(text !== ""){
+
+        let msg = document.createElement("div");
+        msg.className = "message sent";
+        msg.innerText = text;
+
+        document.getElementById("messages").appendChild(msg);
+
+        input.value = "";
+
+        document.getElementById("messages").scrollTop =
+        document.getElementById("messages").scrollHeight;
+    }
+}
+</script>
+
+</body>
+</html>
